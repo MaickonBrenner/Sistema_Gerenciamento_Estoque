@@ -7,6 +7,6 @@ O sistema de gerenciamento de estoque será capaz de cadastrar novos produtos, r
 ## Desenvolvedores do Projeto
 * Maickon Brenner Marques Brandão | [GitHub](https://github.com/MaickonBrenner)
 * Lucas Cardoso Xavier Santos | [GitHub](https://github.com/Luccs3003)
-* Dalton Linconl Saraiva Damasceno | [GitHub](https://github.com)
+* Dalton Linconl Saraiva Damasceno | [GitHub](https://github.com/DaltonLinconl)
 
 ***
