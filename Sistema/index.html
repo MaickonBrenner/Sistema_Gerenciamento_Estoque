@@ -9,12 +9,48 @@
     <title>Sistema de Gerenciamento de Estoque | TechMart</title>
 </head>
 <body>
+
+    <header>
+        <h2 class="logo">TechMart</h2>
+        <h1>Sistema de Gerenciamento</h1>
+        
+    </header>
+
+    <section class="titulo">
+        <h2>Cadastro de Produtos</h2>
+    </section>
     
-    <table>
-        <tr>
-            <td>Nome do Produto:</td>
-            <tb><input type="text" name="nome" id="nome"></tb>
-        </tr>
-    </table>
+    <form method="POST" action="index.html" onsubmit="">
+        <table class="tabela">
+            <tr>
+                <td>Nome do Produto: </td>
+                <td><input type="text" name="nome" id="nome"></tb>
+            </tr>
+            <tr>
+                <td>Descrição do Produto: </td>
+                <td><input type="text" name="descricao" id="descricao"></td>
+            </tr>
+            <tr>
+                <td>Preço do Produto: </td>
+                <td><input type="text" name="preco" id="preco"></td>
+            </tr>
+            <tr>
+                <td>Categoria do Produto: </td>
+                <td>
+                    <select name="categoria" id="categoria">
+                        <option value="item0">Escolha um item</option>
+                        <option value="item1">Computadores</option>
+                        <option value="item2">Celulares</option>
+                        <option value="item3">Eletrodomésticos</option>
+                        <option value="item4">Acessórios</option>
+                        <option value="item5">Outros</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Cadastrar Produto"></td>
+            </tr>
+        </table>
+    </form>
 </body>
 </html>
