@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styleLista.css">
+    <link rel="icon" href="icon.png">
+    <script src="script.js"></script>
+    <title>Sistema de Gerenciamento de Estoque | TechMart</title>
+</head>
+<body>
+
+    <header>
+        <h2 class="logo">TechMart</h2>
+        <h1>Sistema de Gerenciamento</h1>
+        
+    </header>
+
+
+    <main>
+        <div>
+            <label for="search">Buscar Produtos:</label>
+            <input type="text" id="search" placeholder="Digite o nome do produto">
+            <button onclick="buscarProdutos()">Buscar</button>
+        </div>
+
+        <button onclick="cadastrarNovoProduto()">Cadastrar Novo Produto</button>
+
+        <div id="lista-produtos">
+            <!-- Aqui serão exibidos os produtos -->
+        </div>
+
+       
+
+    </main>
+
+    <footer>
+        <!-- Seu conteúdo do rodapé aqui -->
+    </footer>
+</body>
+</html>
