@@ -7,15 +7,19 @@
     font-family: 'Poppins';
 }
 
+html {
+    position: relative; 
+}
+
 body {
     min-height: 100vh;
-    background-color: #334795;
+    background-color: #1b265083;
 }
 
 header {
     position: absolute;
     top: 0;
-    left: 10;
+    left: 10px;
     width: 58%; 
     padding: 30px 100px;
     background: #334795;
@@ -25,15 +29,74 @@ header {
     z-index: 100;
 }
 
+h1 {
+    color: white;
+}
+
+h2 {
+    color:aliceblue;
+}
+
+.titulo {
+    position: relative;
+    margin-top: 10em;
+    display: flex;
+    justify-content: center;
+}
+
+.form-box {
+    width: 70%; /* Ajuste a largura conforme necessário */
+    max-width: 600px; /* Largura máxima para evitar que a caixa fique muito grande */
+    margin: 50px auto; /* Centraliza a caixa na página */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.tabela {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabela td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    
+}
+
+input[type="text"],
+select,
+input[type="submit"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    
+}
+
+input[type="submit"] {
+    background-color: #4caf50;
+    color: #fff;
+    cursor: pointer;
+}
+
+.centralizar-botao {
+    text-align: center;
+}
+
+/* Adicionando media queries para tornar o formulário responsivo */
+@media screen and (max-width: 600px) {
+    .form-box {
+        width: 90%;
+    }
+}
+
 .tabela {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background: url('background.jpg') no-repeat;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed; */
 }
 
 .logo {
@@ -42,17 +105,5 @@ header {
     user-select: none;
 }
 
-.titulo {
-    position: relative;
-    margin-top: 20%;
-    display: flex;
-    justify-content: center;
-}
 
-h1 {
-    color: white;
-}
 
-h2 {
-    color:aliceblue;
-}

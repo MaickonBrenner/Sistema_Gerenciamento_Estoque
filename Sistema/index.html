@@ -16,41 +16,52 @@
         
     </header>
 
-    <section class="titulo">
-        <h2>Cadastro de Produtos</h2>
-    </section>
-    
-    <form method="POST" action="index.html" onsubmit="">
-        <table class="tabela">
-            <tr>
-                <td>Nome do Produto: </td>
-                <td><input type="text" name="nome" id="nome"></tb>
-            </tr>
-            <tr>
-                <td>Descrição do Produto: </td>
-                <td><input type="text" name="descricao" id="descricao"></td>
-            </tr>
-            <tr>
-                <td>Preço do Produto: </td>
-                <td><input type="text" name="preco" id="preco"></td>
-            </tr>
-            <tr>
-                <td>Categoria do Produto: </td>
-                <td>
-                    <select name="categoria" id="categoria">
-                        <option value="item0">Escolha um item</option>
-                        <option value="item1">Computadores</option>
-                        <option value="item2">Celulares</option>
-                        <option value="item3">Eletrodomésticos</option>
-                        <option value="item4">Acessórios</option>
-                        <option value="item5">Outros</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td><input type="submit" value="Cadastrar Produto"></td>
-            </tr>
-        </table>
-    </form>
+
+    <main>
+        <section class="titulo">
+            <h2>Cadastro de Produtos</h2>
+        </section>
+        
+
+        <div class="form-box">
+            <form method="POST" action="index.html" onsubmit="cadastrarProduto(event)">
+                <table class="tabela">
+                    <tr>
+                        <td>Nome do Produto: </td>
+                        <td><input type="text" name="nome" id="nome"></td>
+                    </tr>
+                    <tr>
+                        <td>Descrição do Produto: </td>
+                        <td><input type="text" name="descricao" id="descricao"></td>
+                    </tr>
+                    <tr>
+                        <td>Preço do Produto: </td>
+                        <td><input type="text" name="preco" id="preco"></td>
+                    </tr>
+                    <tr>
+                        <td>Categoria do Produto: </td>
+                        <td>
+                            <select name="categoria" id="categoria">
+                                <option value="item0">Escolha um item</option>
+                                <option value="item1">Computadores</option>
+                                <option value="item2">Celulares</option>
+                                <option value="item3">Eletrodomésticos</option>
+                                <option value="item4">Acessórios</option>
+                                <option value="item5">Outros</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="centralizar-botao" colspan="2"><input type="submit" value="Cadastrar Produto"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+    </main>
+
+    <footer>
+        <!-- Seu conteúdo do rodapé aqui -->
+    </footer>
 </body>
 </html>
