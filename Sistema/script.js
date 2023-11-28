@@ -20,12 +20,42 @@ function cadastrarProduto() {
     } else {
         alert("O produto foi cadastrado com sucesso!")
         limparFormulario();
-        redirecionarParaListaProdutos()
+        redirecionarParaListaProdutos();
+        adicionarProduto(nome,descricao,preco,categoria);
     }
 
     
 
 };
+
+
+function adicionarProduto(produto,desc,valor,cat){
+    let novoProduto = {nome:produto, descricao:desc, preco:valor, categoria:cat};
+
+    if(typeof(Storage) !== "undefined"){
+        let produtos = localStorage.getItem("produtos");
+        if(produtos == null) produtos = [];
+        else produtos = JSON.parse(produtos);
+        produtos.push(novoProduto);
+        localStorage.setItem("produtos",JSON.stringify(produtos))
+        alert("Produto cadastrado!")
+        location.reload
+    }
+
+}
+
+function listarEstoque(){
+    if(typeof(Storage) !== "undefined"){
+        let produtos = localStorage.getItem("produtos");
+        if(produtos == null)
+            document.write("<h3>Ainda não há nenhum item no estoque</h3>");
+        else{
+            produtos = JSON.parse(produtos);
+            exibirListaProdutos(produtos);
+        }
+    }
+}
+
 
 function limparFormulario() {
     document.getElementById("nome").value = "";
@@ -65,13 +95,13 @@ function exibirListaProdutos(produtos) {
         // Crie elementos HTML para exibir cada produto na lista
         var produtoElement = document.createElement("div");
         produtoElement.innerHTML = `
-            <p><strong>ID:</strong> ${produto.id}</p>
-            <p><strong>Nome:</strong> ${produto.nome}</p>
-            <p><strong>Descrição:</strong> ${produto.descricao}</p>
-            <p><strong>Preço:</strong> ${produto.preco}</p>
-            <p><strong>Categoria:</strong> ${produto.categoria}</p>
-            <button onclick="atualizarProduto(${produto.id})">Atualizar</button>
-        `;
+        <ul>
+            <li><strong>Nome:</strong> ${produto.nome}</li>
+            <li><strong>Descrição:</strong> ${produto.descricao}</li>
+            <li><strong>Preço:</strong> ${produto.preco}</li>
+            <li><strong>Categoria:</strong> ${produto.categoria}</li>
+        </ul>
+        <button onclick="atualizarProduto(${produto.id})">Atualizar</button>`;
 
         listaProdutosElement.appendChild(produtoElement);
     });
