@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="icon.png">
+    <script src="ArvoreBinaria.js">
+
+    </script>
+    <title>Sistema de Gerenciamento de Estoque | TechMart</title>
+</head>
+<body>
+    <script>
+        // Criando uma instância da árvore binária
+        let arvoreBinaria = new ArvoreBinaria();
+
+        // Produtos de exemplo
+        let produto1 = { nome: "Produto1", descricao: "Descrição do Produto1", preco: 10.0 };
+        let produto2 = { nome: "Produto2", descricao: "Descrição do Produto2", preco: 15.0 };
+        let produto3 = { nome: "Produto3", descricao: "Descrição do Produto3", preco: 20.0 };
+
+        // Inserindo produtos na árvore
+        arvoreBinaria.inserir(produto2);
+        arvoreBinaria.inserir(produto1);
+        arvoreBinaria.inserir(produto3);
+
+        // Buscando um produto na árvore
+        let resultadoBusca = arvoreBinaria.buscar("Produto2");
+        console.log("Produto encontrado: ", resultadoBusca);
+
+        // Excluindo um produto da árvore
+        arvoreBinaria.excluir("Produto1");
+
+        // Buscando o mesmo produto após a exclusão
+        resultadoBusca = arvoreBinaria.buscar("Produto1");
+        console.log("Produto após exclusão:", resultadoBusca);
+
+        // Exemplo de como você pode imprimir a árvore para debug (substitua por uma lógica mais adequada)
+        console.log("Árvore Binária:", JSON.stringify(arvoreBinaria, null, 2));
+
+
+    </script>
+    
+
+</body>
