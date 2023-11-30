@@ -99,7 +99,7 @@ function exibirListaProdutos(produtos) {
             <li><strong>Preço:</strong> ${produto.preco}</li>
             <li><strong>Categoria:</strong> ${produto.categoria}</li>
         </ul>
-        <button class="button" onclick="atualizarProduto(${produto.id})">Atualizar</button>
+        <button class="button" onclick="atualizarProduto('${produto.nome}')">Atualizar</button>
         <button class="excluir-button" onclick="excluirProduto('${produto.nome}')">Excluir</button>`;
 
         listaProdutosElement.appendChild(produtoElement);
@@ -158,10 +158,10 @@ function excluirProduto(nome) {
 
 
 // Função fictícia para simular a lógica de atualização de um produto
-function atualizarProduto(produtoId) {
-    // Implemente a lógica para atualizar o produto com o ID fornecido
-    // Redirecione para a página de atualização do produto
-    window.location.href = 'AtualizarProduto.html?id=' + produtoId; // Substitua pelo caminho correto
+function atualizarProduto(produtoNome) {
+
+    // Redireciona para a página de lista de produtos
+    redirecionarParaPagina('AtualizrProduto.html?nome='+produtoNome);
 }
 
 
@@ -280,6 +280,22 @@ class No {
       }
   
       return no;
+    }
+
+    atualizarProduto(nomeProduto, descricao, preco, categoria) {
+        // Buscar o nó correspondente ao nome do produto
+        const noParaAtualizar = this.buscarRecursivo(this.raiz, nomeProduto);
+
+        if (noParaAtualizar) {
+            // Atualizar os detalhes do produto
+            noParaAtualizar.produto.descricao = descricao;
+            noParaAtualizar.produto.preco = preco;
+            noParaAtualizar.produto.categoria = categoria;
+
+            // Atualizar a árvore no localStorage
+            localStorage.setItem('arvoreBinaria', JSON.stringify(this));
+
+        }
     }
   
     encontrarMenorValor(no) {

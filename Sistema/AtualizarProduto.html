@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="icon.png">
+    <script src="script.js">
+
+    </script>
+
+    <title>Sistema de Gerenciamento de Estoque | TechMart</title>
+</head>
+<body>
+
+    <header>
+        <h2 class="logo">TechMart</h2>
+        <h1>Sistema de Gerenciamento</h1>
+        
+    </header>
+
+    <main>
+        <div class="form-box">
+            <form method="POST" onsubmit="cadastrarProduto(event)">
+                <table class="tabela">
+                    <tr>
+                        <label>Atualização de Produto:</label>
+                        <td>Nome do Produto:</td>
+                        <td><input type="text" name="nome" id="nome" readonly></td>
+                    </tr>
+                    <tr>
+                        <td>Descrição do Produto:</td>
+                        <td><input type="text" name="descricao" id="descricao"></td>
+                    </tr>
+                    <tr>
+                        <td>Preço do Produto:</td>
+                        <td><input type="text" name="preco" id="preco"></td>
+                    </tr>
+                    <tr>
+                        <td>Categoria do Produto:</td>
+                        <td>
+                            <select name="categoria" id="categoria">
+                                <option value="item0">Escolha um item</option>
+                                <option value="Computadores">Computadores</option>
+                                <option value="Celulares">Celulares</option>
+                                <option value="Eletrodomésticos">Eletrodomésticos</option>
+                                <option value="Acessórios">Acessórios</option>
+                                <option value="Outros">Outros</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="centralizar-botao" colspan="2"><input type="submit" value="Atualizar Produto"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        
+    </main>
+    
+
+    <script>
+        // Função para obter o nome do produto da URL
+        function obterNomeProduto() {
+            const parametrosURL = new URLSearchParams(window.location.search);
+            return parametrosURL.get('nome'); // Supondo que o parâmetro seja chamado 'id'
+        }
+    
+        // Função fictícia para simular a obtenção de um produto pelo nome
+        function obterProdutoPeloNome(nomeProduto) {
+            // Recupere a árvore do localStorage
+            const arvoreSalva = localStorage.getItem('arvoreBinaria');
+    
+            // Crie uma instância da árvore binária
+            let suaArvoreBinaria;
+            if (arvoreSalva) {
+                suaArvoreBinaria = ArvoreBinaria.criarArvoreAPartirDeJSON(JSON.parse(arvoreSalva));
+    
+                // Busque o produto na árvore pelo nome
+                const produto = suaArvoreBinaria.buscar(nomeProduto);
+    
+                return produto || console.log("objeto não encontrado"); // Retorna o produto encontrado ou um objeto vazio se não encontrado
+            } else {
+                return console.log("Arvore não disponivel"); // Retorna um objeto vazio se a árvore não estiver disponível
+            }
+        }
+    
+        // Função para carregar os detalhes do produto na página
+        function carregarDetalhesProduto() {
+            // Obtenha o nome do produto da URL
+            const nomeProduto = obterNomeProduto();
+    
+            // Obtenha os detalhes do produto
+            const produto = obterProdutoPeloNome(nomeProduto);
+    
+            // Preencha os campos do formulário com os detalhes do produto
+            document.getElementById("nome").value = produto.nome;
+            document.getElementById("descricao").value = produto.descricao;
+            document.getElementById("preco").value = produto.preco;
+            document.getElementById("categoria").value = produto.categoria;
+        }
+    
+        // Execute a função para carregar os detalhes do produto ao carregar a página
+        document.addEventListener('DOMContentLoaded', carregarDetalhesProduto);
+    </script>
+</body>
+</html>
