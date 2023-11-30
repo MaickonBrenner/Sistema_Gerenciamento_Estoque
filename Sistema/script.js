@@ -23,7 +23,7 @@ function cadastrarProduto() {
         
         adicionarProduto(nome,descricao,preco,categoria);
         limparFormulario();
-        redirecionarParaListaProdutos();
+        redirecionarParaPagina('ListaProdutos.html');
     }
 
     
@@ -54,18 +54,6 @@ function adicionarProduto(produto,desc,valor,cat){
   
 }
 
-function listarEstoque(){
-    if(typeof(Storage) !== "undefined"){
-        let produtos = localStorage.getItem("produtos");
-        if(produtos == null)
-            document.write("<h3>Ainda não há nenhum item no estoque</h3>");
-        else{
-            produtos = JSON.parse(produtos);
-            exibirListaProdutos(produtos);
-        }
-    }
-}
-
 
 function limparFormulario() {
     document.getElementById("nome").value = "";
@@ -74,23 +62,22 @@ function limparFormulario() {
     document.getElementById("categoria").value = "item0";
 }
 
-function redirecionarParaListaProdutos() {
-    window.location.href = 'ListaProdutos.html'; // Altere para o caminho correto da sua página ListaProdutos
+function redirecionarParaPagina(caminho) {
+    window.location.href = caminho;
 }
 
-function buscarProdutos() {
-    var searchTerm = document.getElementById("search").value;
-    // Lógica para buscar produtos com base no termo de pesquisa
-    // Atualize a lista de produtos exibidos na página
-    var listaProdutos = getTodosProdutos() // Substitua por sua lógica real
-    //var listaProdutos = getTodosProdutos();
-    exibirListaProdutos(listaProdutos);
-}
+function listarEstoque(){
+    // Recupera a árvore do localStorage
+    const arvoreSalva = localStorage.getItem('arvoreBinaria');
 
-
-function cadastrarNovoProduto() {
-    // Redireciona para a página de cadastro de produtos
-    window.location.href = 'index.html'; // Substitua pelo caminho correto
+    // Cria uma instância da árvore binária
+    let suaArvoreBinaria;
+    if (arvoreSalva) {
+        suaArvoreBinaria = ArvoreBinaria.criarArvoreAPartirDeJSON(JSON.parse(arvoreSalva));
+        exibirListaProdutos(suaArvoreBinaria.obterTodosProdutos());
+    } else {
+        document.write("<h3>Ainda não há nenhum item no estoque</h3>");
+    }
 }
 
 function exibirListaProdutos(produtos) {
@@ -112,22 +99,63 @@ function exibirListaProdutos(produtos) {
             <li><strong>Preço:</strong> ${produto.preco}</li>
             <li><strong>Categoria:</strong> ${produto.categoria}</li>
         </ul>
-        <button onclick="atualizarProduto(${produto.id})">Atualizar</button>`;
+        <button class="button" onclick="atualizarProduto(${produto.id})">Atualizar</button>
+        <button class="excluir-button" onclick="excluirProduto('${produto.nome}')">Excluir</button>`;
 
         listaProdutosElement.appendChild(produtoElement);
     });
 }
 
-// Função fictícia para simular a lógica de obtenção de todos os produtos
-function getTodosProdutos() {
-    // Supondo que você tenha uma estrutura de dados de produtos
-    // Substitua por sua lógica real
-    return [
-        { id: 1, nome: "Produto 1", descricao: "Descrição do Produto 1", preco: 19.99, categoria: "Categoria 1" },
-        { id: 2, nome: "Produto 2", descricao: "Descrição do Produto 2", preco: 29.99, categoria: "Categoria 2" },
-        // Adicione mais produtos conforme necessário
-    ];
+
+
+
+function buscarProdutos() {
+    var searchTerm = document.getElementById("search").value;
+
+    // Recupera a árvore do localStorage
+    const arvoreSalva = localStorage.getItem('arvoreBinaria');
+
+    // Cria uma instância da árvore binária
+    let suaArvoreBinaria;
+    if (arvoreSalva) {
+        suaArvoreBinaria = ArvoreBinaria.criarArvoreAPartirDeJSON(JSON.parse(arvoreSalva));
+
+        // Realiza a busca na árvore
+        const resultadoBusca = suaArvoreBinaria.buscar(searchTerm);
+
+        // Exibe o resultado da busca
+        if (resultadoBusca) {
+            exibirListaProdutos([resultadoBusca]);
+        }else if (searchTerm == ""){
+            listarEstoque();
+        }else {
+            document.getElementById("lista-produtos").innerHTML = "Nenhum produto encontrado.";
+        }
+    } else {
+        document.getElementById("lista-produtos").innerHTML = "Nenhum produto encontrado.";
+    }
 }
+
+function excluirProduto(nome) {
+    // Recupera a árvore do localStorage
+    const arvoreSalva = localStorage.getItem('arvoreBinaria');
+
+    // Cria uma instância da árvore binária
+    let suaArvoreBinaria;
+    if (arvoreSalva) {
+        suaArvoreBinaria = ArvoreBinaria.criarArvoreAPartirDeJSON(JSON.parse(arvoreSalva));
+
+        // Exclui o produto da árvore
+        suaArvoreBinaria.excluir(nome);
+
+        // Atualiza a árvore no localStorage
+        localStorage.setItem('arvoreBinaria', JSON.stringify(suaArvoreBinaria));
+
+        // Atualiza a lista de produtos
+        listarEstoque();
+    }
+}
+
 
 // Função fictícia para simular a lógica de atualização de um produto
 function atualizarProduto(produtoId) {
@@ -204,6 +232,21 @@ class No {
       } else {
         return this.buscarRecursivo(no.direita, nome);
       }
+    }
+
+
+    obterTodosProdutos() {
+        const listaProdutos = [];
+        this.adicionarProdutosRecursivo(this.raiz, listaProdutos);
+        return listaProdutos;
+    }
+    
+    adicionarProdutosRecursivo(no, listaProdutos) {
+        if (no !== null) {
+            this.adicionarProdutosRecursivo(no.esquerda, listaProdutos);
+            listaProdutos.push(no.produto);
+            this.adicionarProdutosRecursivo(no.direita, listaProdutos);
+        }
     }
   
     excluir(nome) {

@@ -44,9 +44,29 @@ input[type="text"] {
 button {
     padding: 8px 15px;
     cursor: pointer;
-    background-color: #334795;
+    background-color: #4caf4f;
     color: white;
     border: none;
+    cursor: pointer;
+    border: 3px;
+}
+
+.button:hover {
+    background-color: rgba(43, 131, 46, 0.624)/* Tom mais escuro de vermelho ao passar o mouse */
+}
+
+.excluir-button {
+    background-color: #ff0000; /* Vermelho */
+    color: #ffffff; /* Texto branco */
+    padding: 5px 10px;
+    margin-left: 75%;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.excluir-button:hover {
+    background-color: #cc0000; /* Tom mais escuro de vermelho ao passar o mouse */
 }
 
 #lista-produtos {
@@ -63,9 +83,7 @@ button {
     margin-bottom: 5px;
 }
 
-button {
-    background-color: #4caf50;
-}
+
 
 footer {
     margin-top: 20px;
