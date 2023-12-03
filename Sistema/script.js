@@ -161,7 +161,7 @@ function excluirProduto(nome) {
 function atualizarProduto(produtoNome) {
 
     // Redireciona para a página de lista de produtos
-    redirecionarParaPagina('AtualizrProduto.html?nome='+produtoNome);
+    redirecionarParaPagina('AtualizarProduto.html?nome='+produtoNome);
 }
 
 
@@ -294,6 +294,9 @@ class No {
 
             // Atualizar a árvore no localStorage
             localStorage.setItem('arvoreBinaria', JSON.stringify(this));
+
+            alert("O produto foi atualizado com sucesso!");
+            redirecionarParaPagina('ListaProdutos.html');
 
         }
     }
