@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="icon.png">
-    <script src="script.js">
-
-    </script>
-
+    <script src="script.js"></script>
+    <script src="ArvoreBinaria.js"></script>
     <title>Sistema de Gerenciamento de Estoque | TechMart</title>
 </head>
 <body>
@@ -16,12 +14,11 @@
     <header>
         <h2 class="logo">TechMart</h2>
         <h1>Sistema de Gerenciamento</h1>
-        
     </header>
 
     <main>
         <div class="form-box">
-            <form method="POST" onsubmit="atualizarProduto(produtoNome)">
+            <form method="POST" onsubmit="atualizarProduto(event)">
                 <table class="tabela">
                     <tr>
                         <label>Atualização de Produto:</label>
@@ -55,15 +52,13 @@
                 </table>
             </form>
         </div>
-        
     </main>
-    
 
     <script>
         // Função para obter o nome do produto da URL
         function obterNomeProduto() {
             const parametrosURL = new URLSearchParams(window.location.search);
-            return parametrosURL.get('nome'); // Supondo que o parâmetro seja chamado 'id'
+            return parametrosURL.get('nome'); // Supondo que o parâmetro seja chamado 'nome'
         }
     
         // Função fictícia para simular a obtenção de um produto pelo nome
@@ -102,6 +97,35 @@
     
         // Execute a função para carregar os detalhes do produto ao carregar a página
         document.addEventListener('DOMContentLoaded', carregarDetalhesProduto);
+        
+        // Função para atualizar o produto
+        function atualizarProduto(event) {
+            event.preventDefault();
+
+            // Obtenha os valores atualizados do formulário
+            var nome = document.getElementById("nome").value;
+            var descricao = document.getElementById("descricao").value;
+            var preco = document.getElementById("preco").value;
+            var categoria = document.getElementById("categoria").value;
+
+            // Recupere a árvore do localStorage
+            const arvoreSalva = localStorage.getItem('arvoreBinaria');
+
+            // Crie uma instância da árvore binária
+            let suaArvoreBinaria;
+            if (arvoreSalva) {
+                suaArvoreBinaria = ArvoreBinaria.criarArvoreAPartirDeJSON(JSON.parse(arvoreSalva));
+
+                // Chame o método de atualizar produto da árvore
+                suaArvoreBinaria.atualizarProduto(nome, descricao, preco, categoria);
+
+                // Atualize a árvore no localStorage
+                localStorage.setItem('arvoreBinaria', JSON.stringify(suaArvoreBinaria));
+
+                // Redirecione para a página de lista de produtos
+                window.location.href = 'ListaProdutos.html';
+            }
+        }
     </script>
 </body>
 </html>
